@@ -24,7 +24,9 @@ public class PingWorld extends World {
         
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
-        
+
+        setBackground(new GreenfootImage("field.png"));
+
         if (gameStarted) {
             GreenfootImage background = getBackground();
             background.setColor(Color.BLACK);
@@ -33,8 +35,7 @@ public class PingWorld extends World {
             addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
             addObject(new Bot(100, 20), botX, botY);
             addObject(new Score(), WORLD_WIDTH - 100, 20);
-            
-           
+
         } else {
             Greenfoot.setWorld(new IntroWorld());
         }

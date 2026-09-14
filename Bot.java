@@ -17,7 +17,7 @@ public class Bot extends Paddle {
      * Constructs a new paddle with the given dimensions.
      */
     public Bot(int width, int height) {
-        super(width, height);
+        super(width, height, new Color(52, 245, 160));
     }
 
     /**
