@@ -10,8 +10,8 @@ import greenfoot.GreenfootImage;
  * @version 1
  */
 public class Paddle extends Actor {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private int dx;
 
     /**
@@ -24,14 +24,14 @@ public class Paddle extends Actor {
         createImage();
     }
 
-    /**
-     * Act - do whatever the Paddle wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() {
-        tryChangeDirection();
-        setLocation(getX() + dx, getY());
-    }
+//    /**
+//     * Act - do whatever the Paddle wants to do. This method is called whenever
+//     * the 'Act' or 'Run' button gets pressed in the environment.
+//     */
+//    public void act() {
+//        tryChangeDirection();
+//        setLocation(getX() + dx, getY());
+//    }
 
     /**
      * Will rotate the paddle 180 degrees if the paddle is at worlds edge.

@@ -10,17 +10,13 @@ import greenfoot.GreenfootImage;
  * @author The teachers
  * @version 1
  */
-public class Player extends Actor {
-    private final int width;
-    private final int height;
+public class Player extends Paddle {
 
     /**
      * Constructs a new paddle with the given dimensions.
      */
     public Player(int width, int height) {
-        this.width = width;
-        this.height = height;
-        createImage();
+        super(width, height);
     }
 
     /**
@@ -31,15 +27,4 @@ public class Player extends Actor {
         if (Greenfoot.isKeyDown("right")) this.move(3);
         else if (Greenfoot.isKeyDown("left")) this.move(-3);
     }
-
-    /**
-     * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
-     */
-    private void createImage() {
-        GreenfootImage image = new GreenfootImage(width, height);
-        image.setColor(Color.BLACK);
-        image.fill();
-        setImage(image);
-    }
-
 }
