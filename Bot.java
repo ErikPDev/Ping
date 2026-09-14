@@ -35,19 +35,15 @@ public class Bot extends Actor {
     }
 
     private void createNewBot(){
+        if (!isAtEdge()) return;
+        
         int WORLD_HEIGHT = this.getWorld().getHeight();
-    
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
         
+        Bot bot = new Bot(100, 20);
         
-        if (isAtEdge()){
-            Bot bot = new Bot(100, 20);
-            getWorld().addObject(bot, 0, botY);  
-            
-            
-            getWorld().removeObject(this);
-            }
-       
+        getWorld().addObject(bot, 0, botY);      
+        getWorld().removeObject(this);       
     }
    
     
