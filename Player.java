@@ -11,8 +11,8 @@ import greenfoot.GreenfootImage;
  * @version 1
  */
 public class Player extends Actor {
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     /**
      * Constructs a new paddle with the given dimensions.
@@ -28,11 +28,8 @@ public class Player extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        if (Greenfoot.isKeyDown("right")) this.move(1);
-
-        else if (Greenfoot.isKeyDown("left")) this.move(-1);
-
-
+        if (Greenfoot.isKeyDown("right")) this.move(3);
+        else if (Greenfoot.isKeyDown("left")) this.move(-3);
     }
 
     /**

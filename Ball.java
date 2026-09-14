@@ -138,7 +138,7 @@ public class Ball extends Actor {
     }
 
     /**
-     * Bounces the bal back from a horizontal surface.
+     * Bounces the ball back from a horizontal surface.
      */
     private void revertVertically() {
         int randomness = Greenfoot.getRandomNumber(BOUNCE_DEVIANCE_MAX) - BOUNCE_DEVIANCE_MAX / 2;
