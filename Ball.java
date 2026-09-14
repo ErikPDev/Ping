@@ -17,7 +17,6 @@ public class Ball extends Actor {
     private static final int STARTING_ANGLE_WIDTH = 90;
     private static final int DELAY_TIME = 100;
 
-    private int speed;
     private boolean hasBouncedHorizontally;
     private boolean hasBouncedVertically;
     private int delay;
@@ -48,7 +47,7 @@ public class Ball extends Actor {
         if (delay > 0) {
             delay--;
         } else {
-            move(speed);
+            move(getSpeed());
             checkBounceOffPlayer();
             checkBounceOffWalls();
             checkBounceOffCeiling();
@@ -155,10 +154,19 @@ public class Ball extends Actor {
     }
 
     /**
+     * Todo: Should cap the ball speed
+     * This returns the ball speed based on the game level
+     * @return int - Ball Speed based on the game level
+     */
+    private int getSpeed(){
+        PingWorld pingWorld = (PingWorld)  this.getWorld();
+
+        return 2 + pingWorld.getScoreManager().getGameLevel();
+    }
+    /**
      * Initialize the ball settings.
      */
     private void init() {
-        speed = 2;
         delay = DELAY_TIME;
         hasBouncedHorizontally = false;
         hasBouncedVertically = false;
