@@ -147,15 +147,13 @@ public class Ball extends Actor {
     }
 
     /**
-     * Todo: Should cap the ball speed
      * This returns the ball speed based on the game level
-     *
      * @return int - Ball Speed based on the game level
      */
     private int getSpeed() {
         PingWorld pingWorld = (PingWorld) this.getWorld();
-
-        return 2 + pingWorld.getScoreManager().getGameLevel();
+        int speed = 2 + pingWorld.getScoreManager().getGameLevel()/5;
+        return Math.min(speed, 10);
     }
 
     /**
