@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ball
-comment0.text=\r\n\ A\ Ball\ is\ a\ thing\ that\ bounces\ of\ walls\ and\ paddles\ (or\ at\ least\ i\ should).\r\n\ \r\n\ @author\ The\ teachers\ \r\n\ @version\ 1\r\n
+comment0.text=\r\n\ A\ Ball\ is\ a\ thing\ that\ bounces\ of\ walls\ and\ paddles\ (or\ at\ least\ i\ should).\r\n\r\n\ @author\ The\ teachers\r\n\ @version\ 1\r\n
 comment1.params=
 comment1.target=Ball()
 comment1.text=\r\n\ Contructs\ the\ ball\ and\ sets\ it\ in\ motion\!\r\n
