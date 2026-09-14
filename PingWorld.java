@@ -21,13 +21,20 @@ public class PingWorld extends World {
      */
     public PingWorld(boolean gameStarted) {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
+        
+        int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
+        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
+        
         if (gameStarted) {
             GreenfootImage background = getBackground();
             background.setColor(Color.BLACK);
             // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
             addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
             addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+            addObject(new Bot(100, 20), botX, botY);
             addObject(new Score(), WORLD_WIDTH - 100, 20);
+            
+           
         } else {
             Greenfoot.setWorld(new IntroWorld());
         }

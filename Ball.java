@@ -50,6 +50,7 @@ public class Ball extends Actor {
             checkBounceOffPlayer();
             checkBounceOffWalls();
             checkBounceOffCeiling();
+            checkBounceOffBot();
 
             checkRestart();
         }
@@ -110,6 +111,16 @@ public class Ball extends Actor {
                 PingWorld pingWorld = (PingWorld) this.getWorld();
                 pingWorld.getScoreManager().incrementScore();
 
+                revertVertically();
+            }
+        } else {
+            hasBouncedHorizontally = false;
+        }
+    }
+    
+       private void checkBounceOffBot() {
+        if (isTouching(Bot.class)) {
+            if (!hasBouncedHorizontally) {
                 revertVertically();
             }
         } else {
