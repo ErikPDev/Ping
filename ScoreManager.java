@@ -1,7 +1,8 @@
 public class ScoreManager {
     private int score = 0;
 
-    public ScoreManager(){}
+    public ScoreManager() {
+    }
 
     public int getScore() {
         return this.score;
@@ -11,7 +12,7 @@ public class ScoreManager {
         this.score++;
     }
 
-    public void resetScore(){
+    public void resetScore() {
         this.score = 0;
     }
 

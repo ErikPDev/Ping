@@ -4,7 +4,6 @@ import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 
-
 /**
  * A Ball is a thing that bounces of walls and paddles (or at least i should).
  *
@@ -51,7 +50,7 @@ public class Ball extends Actor {
             checkBounceOffPlayer();
             checkBounceOffWalls();
             checkBounceOffCeiling();
-            
+
             checkRestart();
         }
     }
@@ -104,22 +103,16 @@ public class Ball extends Actor {
             hasBouncedVertically = false;
         }
     }
-    
-     private void checkBounceOffPlayer()
-    {
-        if (isTouching(Player.class))
-        {
-            if (! hasBouncedHorizontally)
-            {
+
+    private void checkBounceOffPlayer() {
+        if (isTouching(Player.class)) {
+            if (!hasBouncedHorizontally) {
                 PingWorld pingWorld = (PingWorld) this.getWorld();
                 pingWorld.getScoreManager().incrementScore();
-                
+
                 revertVertically();
-                              
             }
-        }
-        else
-        {
+        } else {
             hasBouncedHorizontally = false;
         }
     }
@@ -156,13 +149,15 @@ public class Ball extends Actor {
     /**
      * Todo: Should cap the ball speed
      * This returns the ball speed based on the game level
+     *
      * @return int - Ball Speed based on the game level
      */
-    private int getSpeed(){
-        PingWorld pingWorld = (PingWorld)  this.getWorld();
+    private int getSpeed() {
+        PingWorld pingWorld = (PingWorld) this.getWorld();
 
         return 2 + pingWorld.getScoreManager().getGameLevel();
     }
+
     /**
      * Initialize the ball settings.
      */
