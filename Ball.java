@@ -4,6 +4,7 @@ import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
 
+
 /**
  * A Ball is a thing that bounces of walls and paddles (or at least i should).
  *
@@ -111,8 +112,11 @@ public class Ball extends Actor {
         {
             if (! hasBouncedHorizontally)
             {
-                revertVertically();
+                PingWorld pingWorld = (PingWorld) this.getWorld();
+                pingWorld.getScoreManager().incrementScore();
                 
+                revertVertically();
+                              
             }
         }
         else
