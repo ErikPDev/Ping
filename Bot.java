@@ -36,9 +36,7 @@ public class Bot extends Actor {
 
     private void createNewBot(){
         int WORLD_HEIGHT = this.getWorld().getHeight();
-        int WORLD_WIDTH = this.getWorld().getWidth();
-        
-        int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
+    
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
         
         
