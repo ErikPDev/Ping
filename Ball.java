@@ -99,6 +99,7 @@ public class Ball extends Actor {
         if (isTouchingCeiling()) {
             if (!hasBouncedVertically) {
                 revertVertically();
+                SoundManager.playWallHit();
             }
         } else {
             hasBouncedVertically = false;
@@ -109,9 +110,10 @@ public class Ball extends Actor {
         if (isTouching(Player.class)) {
             if (!hasBouncedHorizontally) {
                 PingWorld pingWorld = (PingWorld) this.getWorld();
-                pingWorld.getScoreManager().incrementScore();
+                pingWorld.getScoreManager().incrementScore(); // TODO: Add score cooldown
 
                 revertVertically();
+                SoundManager.playPaddleHit();
             }
         } else {
             hasBouncedHorizontally = false;
@@ -122,6 +124,7 @@ public class Ball extends Actor {
         if (isTouching(Bot.class)) {
             if (!hasBouncedHorizontally) {
                 revertVertically();
+                SoundManager.playPaddleHit();
             }
         } else {
             hasBouncedHorizontally = false;
