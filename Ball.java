@@ -48,8 +48,10 @@ public class Ball extends Actor {
             delay--;
         } else {
             move(speed);
+            checkBounceOffPlayer();
             checkBounceOffWalls();
             checkBounceOffCeiling();
+            
             checkRestart();
         }
     }
@@ -100,6 +102,22 @@ public class Ball extends Actor {
             }
         } else {
             hasBouncedVertically = false;
+        }
+    }
+    
+     private void checkBounceOffPlayer()
+    {
+        if (isTouching(Player.class))
+        {
+            if (! hasBouncedHorizontally)
+            {
+                revertVertically();
+                
+            }
+        }
+        else
+        {
+            hasBouncedHorizontally = false;
         }
     }
 
