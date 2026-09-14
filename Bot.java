@@ -1,7 +1,7 @@
 import greenfoot.Actor;
 import greenfoot.Color;
 import greenfoot.GreenfootImage;
-
+import greenfoot.Greenfoot;
 
 /**
  * A paddle is an object that goes back and forth. Though it would be nice if balls would bounce of it.
@@ -29,15 +29,21 @@ public class Bot extends Actor {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        tryChangeDirection();
+
         setLocation(getX() + dx, getY());
         createNewBot();    
     }
 
     private void createNewBot(){
-        if (isAtEdge()){
-            getWorld().removeObject(this);    
-        }
+        if (!isAtEdge()) return;
+        
+        int WORLD_HEIGHT = this.getWorld().getHeight();
+        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
+        
+        Bot bot = new Bot(100, 20);
+        
+        getWorld().addObject(bot, 0, botY);      
+        getWorld().removeObject(this);       
     }
    
     
