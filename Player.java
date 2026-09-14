@@ -11,7 +11,6 @@ public class Player extends Actor
 {
     private int width;
     private int height;
-    private int dx;
 
     /**
      * Constructs a new paddle with the given dimensions.
@@ -20,7 +19,6 @@ public class Player extends Actor
     {
         this.width = width;
         this.height = height;
-        dx = 1;
         createImage();
     }
 
@@ -30,28 +28,12 @@ public class Player extends Actor
      */
     public void act() 
     {
-        if (Greenfoot.isKeyDown("right")){
-            this.move(1);
-        }
-        else if (Greenfoot.isKeyDown("left")){
-            this.move(-1);
-        }
+        if (Greenfoot.isKeyDown("right")) this.move(1);
+        
+        else if (Greenfoot.isKeyDown("left")) this.move(-1);
+        
         
     }    
-
-    /**
-     * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
-     */
-    private void tryChangeDirection()
-    {
-        //Check to see if we are touching the outer boundaries of the world:
-        // IF we are touching the right boundary OR we are touching the left boundary:
-        if(getX() + width/2 >= getWorld().getWidth() || getX() - width/2 <= 0)
-        {
-            //Change our 'x' direction to the inverted direction:
-            dx = dx * -1;
-        }
-    }
 
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
