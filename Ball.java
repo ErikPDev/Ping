@@ -76,18 +76,33 @@ public class Ball extends Actor {
         return (getY() >= getWorld().getHeight() - BALL_SIZE / 2);
     }
 
+
+    private void setHasBouncedHorizontally(boolean x) {
+        this.hasBouncedHorizontally = x;
+    }
+
+    private void setHasBouncedVertically(boolean y) {
+        this.hasBouncedVertically = y;
+    }
+
+    private void setHasBouncedOffPaddle(boolean x) {
+        this.hasBouncedOffPaddle = x;
+    }
+
     /**
      * Check to see if the ball should bounce off one of the walls.
      * If touching one of the walls, the ball is bouncing off.
      */
     private void checkBounceOffWalls() {
-        if (isTouchingSides()) {
-            if (!hasBouncedHorizontally) {
-                revertHorizontally();
-            }
-        } else {
-            hasBouncedHorizontally = false;
-        }
+        if (!isTouchingSides()) return setHasBouncedHorizontally(false);
+        if (hasBouncedHorizontally) return;
+
+        revertHorizontally();
+    }
+
+    private void incrementPlayerScore() {
+        PingWorld pingWorld = (PingWorld) this.getWorld();
+        pingWorld.getScoreManager().incrementScore();
     }
 
     /**
@@ -95,29 +110,18 @@ public class Ball extends Actor {
      * If touching the ceiling the ball is bouncing off.
      */
     private void checkBounceOffCeiling() {
-        if (isTouchingCeiling()) {
-            if (!hasBouncedVertically) {
-                revertVertically();
-                SoundManager.playWallHit();
-            }
-        } else {
-            hasBouncedVertically = false;
-        }
+        if (!isTouchingCeiling()) return setHasBouncedVertically(false);
+        if (hasBouncedVertically) return;
+
+        revertVertically();
+        SoundManager.playWallHit();
     }
 
     private void checkBounce(){
-        if (!isTouching(Player.class) && !isTouching(Bot.class)) {
-            hasBouncedOffPaddle = false;
-            return;
-        }
-        if (hasBouncedOffPaddle) {
-            return;
-        }
+        if (!isTouching(Player.class) && !isTouching(Bot.class)) return setHasBouncedOffPaddle(false);
+        if (hasBouncedOffPaddle) return;
 
-        if(isTouching(Player.class)){
-            PingWorld pingWorld = (PingWorld) this.getWorld();
-            pingWorld.getScoreManager().incrementScore(); // TODO: Add score cooldown
-        }
+        if(isTouching(Player.class)) incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -129,10 +133,9 @@ public class Ball extends Actor {
      * If touching the floor the ball is restarted in initial position and speed.
      */
     private void checkRestart() {
-        if (isTouchingFloor()) {
-            init();
-            setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
-        }
+        if (!isTouchingFloor()) return;
+        init();
+        setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
     }
 
     /**
