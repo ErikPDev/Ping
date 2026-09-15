@@ -18,6 +18,7 @@ public class Ball extends Actor {
 
     private boolean hasBouncedHorizontally;
     private boolean hasBouncedVertically;
+    private boolean hasBouncedOffPaddle;
     private int delay;
 
     /**
@@ -45,10 +46,10 @@ public class Ball extends Actor {
             delay--;
         } else {
             move(getSpeed());
-            checkBounceOffPlayer();
+
+            checkBounce();
             checkBounceOffWalls();
             checkBounceOffCeiling();
-            checkBounceOffBot();
 
             checkRestart();
         }
@@ -104,29 +105,23 @@ public class Ball extends Actor {
         }
     }
 
-    private void checkBounceOffPlayer() {
-        if (isTouching(Player.class)) {
-            if (!hasBouncedHorizontally) {
-                PingWorld pingWorld = (PingWorld) this.getWorld();
-                pingWorld.getScoreManager().incrementScore(); // TODO: Add score cooldown
+    private void checkBounce(){
+        if (!isTouching(Player.class) && !isTouching(Bot.class)) {
+            hasBouncedOffPaddle = false;
+            return;
+        }
+        if (hasBouncedOffPaddle) {
+            return;
+        }
 
-                revertVertically();
-                SoundManager.playPaddleHit();
-            }
-        } else {
-            hasBouncedHorizontally = false;
+        if(isTouching(Player.class)){
+            PingWorld pingWorld = (PingWorld) this.getWorld();
+            pingWorld.getScoreManager().incrementScore(); // TODO: Add score cooldown
         }
-    }
-    
-       private void checkBounceOffBot() {
-        if (isTouching(Bot.class)) {
-            if (!hasBouncedHorizontally) {
-                revertVertically();
-                SoundManager.playPaddleHit();
-            }
-        } else {
-            hasBouncedHorizontally = false;
-        }
+
+        this.revertVertically();
+        SoundManager.playPaddleHit();
+        hasBouncedOffPaddle = true;
     }
 
     /**
@@ -164,7 +159,7 @@ public class Ball extends Actor {
      */
     private int getSpeed() {
         PingWorld pingWorld = (PingWorld) this.getWorld();
-        int speed = 2 + pingWorld.getScoreManager().getGameLevel()/5;
+        int speed = 4 + pingWorld.getScoreManager().getGameLevel()/5;
         return Math.min(speed, 10);
     }
 
@@ -175,6 +170,7 @@ public class Ball extends Actor {
         delay = DELAY_TIME;
         hasBouncedHorizontally = false;
         hasBouncedVertically = false;
+        hasBouncedOffPaddle = false;
         setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH) + STARTING_ANGLE_WIDTH / 2);
     }
 

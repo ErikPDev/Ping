@@ -3,8 +3,6 @@ import events.ScoreEvent;
 public class ScoreManager {
     private int score = 0;
 
-    public ScoreManager() {
-    }
 
     public int getScore() {
         return this.score;

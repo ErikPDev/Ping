@@ -24,14 +24,6 @@ public class Paddle extends Actor {
         createImage(color);
     }
 
-//    /**
-//     * Act - do whatever the Paddle wants to do. This method is called whenever
-//     * the 'Act' or 'Run' button gets pressed in the environment.
-//     */
-//    public void act() {
-//        tryChangeDirection();
-//        setLocation(getX() + dx, getY());
-//    }
 
     /**
      * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
