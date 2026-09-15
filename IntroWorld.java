@@ -1,4 +1,5 @@
 import greenfoot.Color;
+import greenfoot.Font;
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
@@ -18,9 +19,20 @@ public class IntroWorld extends World {
      */
     public IntroWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
+        setBackground("space.jpg");
+
+        createText("THE PING GAME", (WORLD_WIDTH / 2) - 200, WORLD_HEIGHT / 6, 50);
+        createText("Made by: Space Pong", 10, 690, 15);
+        createText("Press ENTER to start", 130, 350, 20);
+        createText("Use left and right => keys to move!", 95 , 450, 15);
+    }
+
+    private void createText(String text, int x, int y, int fontSize) {
         GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
-        background.drawString("Intro world. Hit <enter> to start game...", WORLD_WIDTH / 2 - 100, WORLD_HEIGHT / 2);
+        Font gameFont = new Font("Courier New", true, false, fontSize);
+        background.setFont(gameFont);
+        background.setColor(Color.GREEN);
+        background.drawString(text, x, y);
     }
 
     public void act() {
