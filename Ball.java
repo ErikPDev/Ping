@@ -105,6 +105,7 @@ public class Ball extends Actor {
         if (hasBouncedHorizontally) return;
 
         revertHorizontally();
+        SoundManager.playWallHit();
     }
 
     private void incrementPlayerScore() {
@@ -141,6 +142,7 @@ public class Ball extends Actor {
 
         this.revertVertically();
         SoundManager.playPaddleHit();
+
         hasBouncedOffPaddle = true;
     }
 
