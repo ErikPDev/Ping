@@ -21,13 +21,13 @@ public class IntroWorld extends World {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
         setBackground("space.jpg");
 
-        createText("THE PING GAME", (WORLD_WIDTH / 2) - 200, WORLD_HEIGHT / 6, 50, Color.GREEN);
-        createText("Made by: Space Pong", 10, 690, 15, Color.GREEN);
-        createText("Press ENTER to start", 130, 350, 20, Color.GREEN);
-        createText("Use left and right => keys to move!", 95 , 450, 15, Color.GREEN );
+        createText("THE PING GAME", (WORLD_WIDTH / 2) - 200, WORLD_HEIGHT / 6, 50);
+        createText("Made by: Space Pong", 10, 690, 15);
+        createText("Press ENTER to start", 130, 350, 20);
+        createText("Use left and right => keys to move!", 95 , 450, 15);
     }
 
-    private void createText(String text, int x, int y, int fontSize, Color color) {
+    private void createText(String text, int x, int y, int fontSize) {
         GreenfootImage background = getBackground();
         Font gameFont = new Font("Courier New", true, false, fontSize);
         background.setFont(gameFont);
