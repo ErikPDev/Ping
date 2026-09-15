@@ -10,9 +10,9 @@ import greenfoot.GreenfootImage;
  * @version 1
  */
 public class Paddle extends Actor {
+    private final int COLOR_RADIUS = 30;
     private final int width;
     private final int height;
-    private int dx;
 
     /**
      * Constructs a new paddle with the given dimensions.
@@ -20,29 +20,7 @@ public class Paddle extends Actor {
     public Paddle(int width, int height, Color color) {
         this.width = width;
         this.height = height;
-        dx = 1;
         createImage(color);
-    }
-
-//    /**
-//     * Act - do whatever the Paddle wants to do. This method is called whenever
-//     * the 'Act' or 'Run' button gets pressed in the environment.
-//     */
-//    public void act() {
-//        tryChangeDirection();
-//        setLocation(getX() + dx, getY());
-//    }
-
-    /**
-     * Will rotate the paddle 180 degrees if the paddle is at worlds edge.
-     */
-    private void tryChangeDirection() {
-        //Check to see if we are touching the outer boundaries of the world:
-        // IF we are touching the right boundary OR we are touching the left boundary:
-        if (getX() + width / 2 >= getWorld().getWidth() || getX() - width / 2 <= 0) {
-            //Change our 'x' direction to the inverted direction:
-            dx = dx * -1;
-        }
     }
 
     /**
@@ -50,9 +28,18 @@ public class Paddle extends Actor {
      */
     private void createImage(Color color) {
         GreenfootImage image = new GreenfootImage(width, height);
-        image.setColor(color);
-        image.fill();
+
+        java.awt.Graphics2D g2 = image.getAwtImage().createGraphics();
+
+        g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+
+        g2.setColor(new java.awt.Color(color.getRed(), color.getGreen(), color.getBlue()));
+        g2.fillRoundRect(0, 0, this.width, this.height, this.COLOR_RADIUS, this.COLOR_RADIUS);
+
+        g2.dispose();
+
         setImage(image);
     }
+
 
 }

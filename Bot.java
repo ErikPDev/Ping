@@ -25,7 +25,6 @@ public class Bot extends Paddle {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-
         setLocation(getX() + dx, getY());
         createNewBot();    
     }
