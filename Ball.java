@@ -132,6 +132,7 @@ public class Ball extends Actor {
             setHasBouncedOffPaddle(false);
             return;
         }
+
         if (hasBouncedOffPaddle) return;
         if (!isTouching(Paddle.class)) return;
 
