@@ -1,5 +1,4 @@
 import greenfoot.Actor;
-import greenfoot.Color;
 import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 
@@ -55,6 +54,10 @@ public class Ball extends Actor {
         }
     }
 
+    private boolean isMovingUpwards() {
+        return getRotation() < 360 && getRotation() > 180;
+    }
+
     /**
      * Returns true if the ball is touching one of the side walls.
      */
@@ -94,7 +97,11 @@ public class Ball extends Actor {
      * If touching one of the walls, the ball is bouncing off.
      */
     private void checkBounceOffWalls() {
-        if (!isTouchingSides()) return setHasBouncedHorizontally(false);
+        if (!isTouchingSides()) {
+            setHasBouncedHorizontally(false);
+            return;
+        }
+
         if (hasBouncedHorizontally) return;
 
         revertHorizontally();
@@ -110,18 +117,26 @@ public class Ball extends Actor {
      * If touching the ceiling the ball is bouncing off.
      */
     private void checkBounceOffCeiling() {
-        if (!isTouchingCeiling()) return setHasBouncedVertically(false);
+        if (!isTouchingCeiling()) {
+            setHasBouncedVertically(false);
+            return;
+        }
         if (hasBouncedVertically) return;
 
         revertVertically();
         SoundManager.playWallHit();
     }
 
-    private void checkBounce(){
-        if (!isTouching(Player.class) && !isTouching(Bot.class)) return setHasBouncedOffPaddle(false);
+    private void checkBounce() {
+        if (!isTouching(Player.class) && !isTouching(Bot.class)) {
+            setHasBouncedOffPaddle(false);
+            return;
+        }
         if (hasBouncedOffPaddle) return;
+        if (!isTouching(Paddle.class)) return;
 
-        if(isTouching(Player.class)) incrementPlayerScore();
+        if (isTouching(Bot.class) && !isMovingUpwards()) return;
+        if (isTouching(Player.class)) incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -158,11 +173,12 @@ public class Ball extends Actor {
 
     /**
      * This returns the ball speed based on the game level
+     *
      * @return int - Ball Speed based on the game level
      */
     private int getSpeed() {
         PingWorld pingWorld = (PingWorld) this.getWorld();
-        int speed = 4 + pingWorld.getScoreManager().getGameLevel()/5;
+        int speed = 4 + pingWorld.getScoreManager().getGameLevel() / 5;
         return Math.min(speed, 10);
     }
 
