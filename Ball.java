@@ -140,17 +140,29 @@ public class Ball extends Actor {
     }
         if (hasBouncedOffPaddle) return;
 
-        if(isTouching(Player.class)) incrementPlayerScore();
-
-        this.revertVertically();
-        SoundManager.playPaddleHit();
-        hasBouncedOffPaddle = true;
+        if(isTouching(Paddle.class)){
         
-        if(isTouching(Bot.class) && isMovingUpwards()){
+            if(isTouching(Player.class)){
+            incrementPlayerScore();
+            this.revertVertically();
+            SoundManager.playPaddleHit();
+            hasBouncedOffPaddle = true;
+            }
+            
+            else if(isTouching(Bot.class) && isMovingUpwards()){
             this.revertVertically();
             SoundManager.playPaddleHit();
             hasBouncedOffPaddle = true;
         }
+        
+         else return;
+        }
+        
+        
+        
+        
+        
+        
     }
 
     /**
