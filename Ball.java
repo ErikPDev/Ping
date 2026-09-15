@@ -18,6 +18,11 @@ public class Ball extends Actor {
 
     private boolean hasBouncedHorizontally;
     private boolean hasBouncedVertically;
+<<<<<<< Updated upstream
+=======
+    private boolean hasBouncedOffPaddle;
+    private boolean isMovingUpward;
+>>>>>>> Stashed changes
     private int delay;
 
     /**
@@ -50,12 +55,24 @@ public class Ball extends Actor {
             checkBounceOffPlayer();
             checkBounceOffWalls();
             checkBounceOffCeiling();
+<<<<<<< Updated upstream
             checkBounceOffBot();
+=======
+            
+            isMovingUpwards();
+>>>>>>> Stashed changes
 
             checkRestart();
         }
     }
-
+    private boolean isMovingUpwards(){
+        if(getRotation() <360 && getRotation() >180){
+            isMovingUpward = true;
+            return true;
+        }
+        isMovingUpward = false;
+            return false;
+    }
     /**
      * Returns true if the ball is touching one of the side walls.
      */
@@ -82,6 +99,7 @@ public class Ball extends Actor {
      * If touching one of the walls, the ball is bouncing off.
      */
     private void checkBounceOffWalls() {
+<<<<<<< Updated upstream
         if (isTouchingSides()) {
             if (!hasBouncedHorizontally) {
                 revertHorizontally();
@@ -89,6 +107,20 @@ public class Ball extends Actor {
         } else {
             hasBouncedHorizontally = false;
         }
+=======
+    if (!isTouchingSides()) {
+        setHasBouncedHorizontally(false);
+        return;
+    }
+    if (hasBouncedHorizontally) return;
+
+    revertHorizontally();
+}
+
+    private void incrementPlayerScore() {
+        PingWorld pingWorld = (PingWorld) this.getWorld();
+        pingWorld.getScoreManager().incrementScore();
+>>>>>>> Stashed changes
     }
 
     /**
@@ -96,6 +128,7 @@ public class Ball extends Actor {
      * If touching the ceiling the ball is bouncing off.
      */
     private void checkBounceOffCeiling() {
+<<<<<<< Updated upstream
         if (isTouchingCeiling()) {
             if (!hasBouncedVertically) {
                 revertVertically();
@@ -126,6 +159,41 @@ public class Ball extends Actor {
         } else {
             hasBouncedHorizontally = false;
         }
+=======
+        if (!isTouchingCeiling()) {
+         setHasBouncedVertically(false);   
+         return;
+        }
+        if(hasBouncedVertically) return;
+
+        revertVertically();
+        SoundManager.playWallHit();
+    }
+
+    private void checkBounce(){
+        if (!isTouching(Player.class) && !isTouching(Bot.class)) 
+        { 
+            setHasBouncedOffPaddle(false);
+            return;
+        }
+        
+        
+        if (hasBouncedOffPaddle) return;
+
+        if(isTouching(Player.class)) incrementPlayerScore();
+
+        this.revertVertically();
+        SoundManager.playPaddleHit();
+        hasBouncedOffPaddle = true;
+        
+        if(isTouching(Bot.class) && isMovingUpwards()){
+            this.revertVertically();
+            SoundManager.playPaddleHit();
+            hasBouncedOffPaddle = true;
+        }
+
+        
+>>>>>>> Stashed changes
     }
 
     /**
