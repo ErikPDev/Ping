@@ -26,7 +26,7 @@ public class GameOver extends World {
 
     public void act(){
         if (Greenfoot.isKeyDown("enter"))
-            Greenfoot.setWorld(new PingWorld(false));
+            Greenfoot.setWorld(new PingWorld());
     }
     
     private void createText(String text, int x, int y, int fontSize) {

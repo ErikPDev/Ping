@@ -20,7 +20,7 @@ public class PingWorld extends World {
      * Constructor for objects of class PingWorld.
      * TODO: refactor this class
      */
-    public PingWorld(boolean isSlidingPaddle) {
+    public PingWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
         
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
@@ -34,7 +34,7 @@ public class PingWorld extends World {
         addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
         addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
 
-        if (isSlidingPaddle)
+        if (GlobalConfig.getGameMode() == 0)
             addObject(new SlidingPaddle(100, 20), botX, botY);
         else
             addObject(new Bot(100, 20), botX, 50);
