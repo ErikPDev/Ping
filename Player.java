@@ -16,7 +16,7 @@ public class Player extends Paddle {
      * Constructs a new paddle with the given dimensions.
      */
     public Player(int width, int height) {
-        super(width, height, Color.WHITE);
+        super(width, height, "paddle1.png");
     }
 
     /**
