@@ -21,13 +21,24 @@ public class Paddle extends Actor {
     public Paddle(int width, int height, Color color) {
         this.width = width;
         this.height = height;
-        createImage(color);
+        drawPaddle(color);
+    }
+
+    public Paddle(int width, int height, String imagePath) {
+        this.width = width;
+        this.height = height;
+        createImage(imagePath);
+    }
+
+    private void createImage(String imagePath){
+        GreenfootImage image = new GreenfootImage(imagePath);
+        setImage(image);
     }
 
     /**
      * Creates and sets an image for the paddle, the image will have the same dimensions as the paddles width and height.
      */
-    private void createImage(Color color) {
+    private void drawPaddle(Color color) {
         GreenfootImage image = new GreenfootImage(width, height);
 
         java.awt.Graphics2D g2 = image.getAwtImage().createGraphics();
@@ -41,6 +52,5 @@ public class Paddle extends Actor {
 
         setImage(image);
     }
-
 
 }

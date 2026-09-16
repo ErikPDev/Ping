@@ -22,6 +22,8 @@ public class PingWorld extends World {
      */
     public PingWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
+
+        setPaintOrder(Ball.class, Paddle.class,TextDisplay.class);
         
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
