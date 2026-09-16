@@ -18,8 +18,9 @@ public class PingWorld extends World {
 
     /**
      * Constructor for objects of class PingWorld.
+     * TODO: refactor this class
      */
-    public PingWorld(boolean gameStarted) {
+    public PingWorld(boolean isSlidingPaddle) {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
         
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
@@ -27,18 +28,18 @@ public class PingWorld extends World {
 
         setBackground(new GreenfootImage("field.png"));
 
-        if (gameStarted) {
-            GreenfootImage background = getBackground();
-            background.setColor(Color.BLACK);
-            // Create a new world with WORLD_WIDTHxWORLD_HEIGHT cells with a cell size of 1x1 pixels.
-            addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-            addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
-            addObject(new Bot(100, 20), botX, botY);
-            addObject(new Score(), WORLD_WIDTH - 100, 20);
+        GreenfootImage background = getBackground();
+        background.setColor(Color.BLACK);
 
-        } else {
-            Greenfoot.setWorld(new IntroWorld());
-        }
+        addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
+        addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+
+        if (isSlidingPaddle)
+            addObject(new SlidingPaddle(100, 20), botX, botY);
+        else
+            addObject(new Bot(100, 20), botX, 50);
+
+        addObject(new Score(), WORLD_WIDTH - 100, 20);
     }
 
     public ScoreManager getScoreManager() {

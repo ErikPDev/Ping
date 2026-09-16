@@ -11,6 +11,7 @@ import greenfoot.GreenfootImage;
  */
 public class Paddle extends Actor {
     private final int COLOR_RADIUS = 30;
+    public static final int PADDLE_SPEED = 3;
     private final int width;
     private final int height;
 

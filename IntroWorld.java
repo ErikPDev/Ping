@@ -38,7 +38,7 @@ public class IntroWorld extends World {
     public void act() {
         String key = Greenfoot.getKey();
         if (key != null && key.equals("enter")) {
-            Greenfoot.setWorld(new PingWorld(true));
+            Greenfoot.setWorld(new PingWorld(false));
         }
     }
 

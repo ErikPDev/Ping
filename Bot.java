@@ -1,7 +1,8 @@
 import greenfoot.Actor;
 import greenfoot.Color;
-import greenfoot.GreenfootImage;
 import greenfoot.Greenfoot;
+import greenfoot.GreenfootImage;
+
 
 /**
  * A paddle is an object that goes back and forth. Though it would be nice if balls would bounce of it.
@@ -11,34 +12,22 @@ import greenfoot.Greenfoot;
  */
 public class Bot extends Paddle {
 
-    private int dx = 1;
-
     /**
      * Constructs a new paddle with the given dimensions.
      */
     public Bot(int width, int height) {
-        super(width, height, new Color(52, 245, 160));
+        super(width, height, Color.RED);
     }
 
     /**
-     * Act - do whatever the Bot wants to do. This method is called whenever
+     * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        setLocation(getX() + dx, getY());
-        createNewBot();    
+        // Find the ball in the game
+        Ball ball = this.getWorld().getObjects(Ball.class).getFirst();
+        if (!ball.isMovingUpwards()) return;
+        if (ball.getX() > this.getX()) move(PADDLE_SPEED);
+        if (ball.getX() < this.getX()) move(-PADDLE_SPEED);
     }
-
-    private void createNewBot(){
-        if (!isAtEdge()) return;
-        
-        int WORLD_HEIGHT = this.getWorld().getHeight();
-        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
-        
-        Bot bot = new Bot(100, 20);
-        
-        getWorld().addObject(bot, 0, botY);      
-        getWorld().removeObject(this);       
-    }
-
 }

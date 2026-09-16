@@ -55,7 +55,7 @@ public class Ball extends Actor {
         }
     }
 
-    private boolean isMovingUpwards() {
+    public boolean isMovingUpwards() {
         return getRotation() < 360 && getRotation() > 180;
     }
 
@@ -130,7 +130,7 @@ public class Ball extends Actor {
     }
 
     private void checkBounce() {
-        if (!isTouching(Player.class) && !isTouching(Bot.class)) {
+        if (!isTouching(Player.class) && !isTouching(SlidingPaddle.class) && !isTouching(Bot.class)) {
             setHasBouncedOffPaddle(false);
             return;
         }
@@ -138,7 +138,9 @@ public class Ball extends Actor {
         if (hasBouncedOffPaddle) return;
         if (!isTouching(Paddle.class)) return;
 
+        if (isTouching(SlidingPaddle.class) && !isMovingUpwards()) return;
         if (isTouching(Bot.class) && !isMovingUpwards()) return;
+
         if (isTouching(Player.class)) incrementPlayerScore();
 
         this.revertVertically();
