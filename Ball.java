@@ -21,7 +21,7 @@ public class Ball extends Actor {
     private int delay;
 
     /**
-     * Contructs the ball and sets it in motion!
+     * Constructs the ball and sets it in motion!
      */
     public Ball() {
         createImage();
@@ -50,7 +50,8 @@ public class Ball extends Actor {
             checkBounceOffWalls();
             checkBounceOffCeiling();
 
-            checkRestart();
+
+            checkGameOver();
         }
     }
 
@@ -149,11 +150,22 @@ public class Ball extends Actor {
     /**
      * Check to see if the ball should be restarted.
      * If touching the floor the ball is restarted in initial position and speed.
+     * @deprecated Kept for testing
      */
     private void checkRestart() {
         if (!isTouchingFloor()) return;
         init();
         setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+    }
+
+    /**
+     * Check to see if the ball touched the floor.
+     * If touching the floor, the game world is switched to GameOver
+     */
+    private void checkGameOver(){
+        if (!isTouchingFloor()) return;
+        PingWorld pingWorld = (PingWorld) this.getWorld();
+        Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
     }
 
     /**
