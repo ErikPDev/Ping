@@ -1,9 +1,25 @@
-import greenfoot.*;
+import greenfoot.Actor;
+import greenfoot.Color;
+import greenfoot.GreenfootImage;
+import greenfoot.Greenfoot;
+import greenfoot.Font;
 
 public abstract class Button extends Actor {
-    private String text;
-    private int width;
-    private int height;
+    // Normal (idle) palette
+    private static final Color NORMAL_BACKGROUND = new Color(10, 15, 30);
+    private static final Color NORMAL_BORDER = new Color(0, 255, 255);   // Neon cyan
+    private static final Color NORMAL_TEXT = new Color(200, 255, 255);  // Light cyan
+
+    // Hover palette
+    private static final Color HOVER_BACKGROUND = new Color(25, 15, 45);
+    private static final Color HOVER_BORDER = new Color(255, 0, 128);   // Neon pink/magenta
+    private static final Color HOVER_TEXT = new Color(255, 255, 255);   // Crisp white
+
+    private static final String FONT_NAME = "Courier New";
+
+    private final String text;
+    private final int width;
+    private final int height;
     private boolean isHovered = false;
 
     public Button(String text, int width, int height) {
@@ -17,38 +33,31 @@ public abstract class Button extends Actor {
     private void drawButton(boolean hover) {
         GreenfootImage img = new GreenfootImage(width, height);
 
-        if (hover) {
-            // Hover state: Brighter background, neon magenta/pink glow
-            img.setColor(new Color(25, 15, 45));
-            img.fill();
+        Color background = hover ? HOVER_BACKGROUND : NORMAL_BACKGROUND;
+        Color border = hover ? HOVER_BORDER : NORMAL_BORDER;
+        Color textColor = hover ? HOVER_TEXT : NORMAL_TEXT;
 
-            img.setColor(new Color(255, 0, 128)); // Neon Pink/Magenta
-            img.drawRect(0, 0, width - 1, height - 1);
-            img.drawRect(1, 1, width - 3, height - 3);
+        img.setColor(background);
+        img.fill();
 
-            img.setColor(new Color(255, 255, 255)); // Crisp white text
-        } else {
-            // Normal state: Classic dark space-indigo, cyan glow
-            img.setColor(new Color(10, 15, 30));
-            img.fill();
+        img.setColor(border);
+        img.drawRect(0, 0, width - 1, height - 1);
+        img.drawRect(1, 1, width - 3, height - 3);
 
-            img.setColor(new Color(0, 255, 255)); // Neon Cyan
-            img.drawRect(0, 0, width - 1, height - 1);
-            img.drawRect(1, 1, width - 3, height - 3);
+        img.setColor(textColor);
+        drawCenteredText(img);
 
-            img.setColor(new Color(200, 255, 255)); // Light cyan text
-        }
+        setImage(img);
+    }
 
-        // Render text
-        Font spaceFont = new Font("Courier New", true, false, height / 3);
-        img.setFont(spaceFont);
+    private void drawCenteredText(GreenfootImage img) {
+        img.setFont(new Font(FONT_NAME, true, false, height / 3));
 
-        int textWidth = (int) (text.length() * (height / 5));
+        int textWidth = (int) (text.length() * (height / 5.0));
         int textX = (width - textWidth) / 2;
         int textY = (height / 2) + (height / 8);
 
         img.drawString(text, textX, textY);
-        setImage(img);
     }
 
     public void act() {
@@ -57,7 +66,7 @@ public abstract class Button extends Actor {
         executeAction();
     }
 
-    private void setHoverButton(boolean isHover){
+    private void setHoverButton(boolean isHover) {
         isHovered = isHover;
         drawButton(isHover);
     }
