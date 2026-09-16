@@ -24,7 +24,7 @@ public class IntroWorld extends World {
         createText("THE PING GAME", (WORLD_WIDTH / 2) - 200, WORLD_HEIGHT / 6, 50);
         createText("Made by: Space Pong", 10, 690, 15);
         // createText("Press ENTER to start", 130, 350, 20);
-        createText("Use left and right => keys to move!", 95 , 550, 15);
+        createText("Use left and right < > or A and D keys to move!", 35 , 550, 15);
 
         addObject(new SlidingPaddleButton(), WORLD_WIDTH / 2, 350);
         addObject(new BotPaddleButton(), WORLD_WIDTH / 2, 450);

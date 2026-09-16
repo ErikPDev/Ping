@@ -24,7 +24,7 @@ public class Player extends Paddle {
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() {
-        if (Greenfoot.isKeyDown("right")) this.move(PADDLE_SPEED);
-        else if (Greenfoot.isKeyDown("left")) this.move(-PADDLE_SPEED);
+        if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("D")) this.move(PADDLE_SPEED);
+        else if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("A")) this.move(-PADDLE_SPEED);
     }
 }
