@@ -27,8 +27,9 @@ public class PingWorld extends World {
         
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
-
-        setBackground(new GreenfootImage("field.png"));
+        
+        if(GlobalConfig.getGameMode()== 2) setBackground(new GreenfootImage("field-multiplayer.png"));
+        else setBackground(new GreenfootImage("field.png"));
 
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
@@ -38,10 +39,16 @@ public class PingWorld extends World {
 
         if (GlobalConfig.getGameMode() == 0)
             addObject(new SlidingPaddle(100, 20), botX, botY);
-        else
+        else if (GlobalConfig.getGameMode() == 1)
             addObject(new Bot(100, 20), botX, 50);
+        else 
+            addObject(new Player1(100, 20), 60, 50);
 
-        addObject(new Score(), WORLD_WIDTH - 100, 20);
+        if (!(GlobalConfig.getGameMode() == 2)) addObject(new Score(), WORLD_WIDTH - 100, 20);
+        else{
+            addObject(new P1score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) + 20);
+            addObject(new P2score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) - 20);
+        }
     }
 
     public ScoreManager getScoreManager() {
