@@ -2,7 +2,7 @@ import greenfoot.Greenfoot;
 
 public class MultiplayerButton extends Button {
    public MultiplayerButton() {
-        super("Multiplier", 250, 60);
+        super("Multiplayer", 250, 60);
     }
 
     public void executeAction() {
