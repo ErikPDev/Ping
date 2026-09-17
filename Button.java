@@ -1,8 +1,4 @@
-import greenfoot.Actor;
-import greenfoot.Color;
-import greenfoot.GreenfootImage;
-import greenfoot.Greenfoot;
-import greenfoot.Font;
+import greenfoot.*;
 
 public abstract class Button extends Actor {
     // Normal (idle) palette
@@ -46,8 +42,7 @@ public abstract class Button extends Actor {
 
         img.setColor(textColor);
         drawCenteredText(img);
-       
-    
+
 
         setImage(img);
     }
@@ -65,8 +60,8 @@ public abstract class Button extends Actor {
     public void act() {
         checkHover();
         if (!Greenfoot.mouseClicked(this)) return;
-      
-        
+
+        SoundManager.playButtonClick();
         executeAction();
     }
 
@@ -74,18 +69,16 @@ public abstract class Button extends Actor {
         isHovered = isHover;
         drawButton(isHover);
     }
-    
 
 
     // https://www.greenfoot.org/topics/4029
     private void checkHover() {
-        if (Greenfoot.mouseMoved(this) && !isHovered)
-        {
+        if (Greenfoot.mouseMoved(this) && !isHovered) {
             setHoverButton(true);
+            SoundManager.playButtonOver();
         }
 
         if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this) && isHovered) {
-            
             setHoverButton(false);
         }
     }

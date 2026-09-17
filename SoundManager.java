@@ -5,8 +5,10 @@ public class SoundManager {
     private static final String GAME_WIN_AUDIO = "game-over.wav";
     private static final String SCORE_POINT_AUDIO = "point-scored.wav";
     private static final String PADDLE_HIT_AUDIO = "paddle-hit.wav";
-    private static final String MENU_HOVER_AUDIO = "gamemode-hover.wav";
-    
+    private static final String MENU_HOVER_AUDIO = "gamemode-hover.mp3";
+    private static final String MENU_CLICK_AUDIO = "wall-hit.wav";
+
+
     static void playWallHit(){
         Greenfoot.playSound(WALL_HIT_AUDIO);
     }
@@ -23,8 +25,12 @@ public class SoundManager {
         Greenfoot.playSound(PADDLE_HIT_AUDIO);
     }
     
-    static void playMenuHover(){
+    static void playButtonOver(){
         Greenfoot.playSound(MENU_HOVER_AUDIO);
+    }
+
+    static void playButtonClick(){
+        Greenfoot.playSound(MENU_CLICK_AUDIO);
     }
 
 }

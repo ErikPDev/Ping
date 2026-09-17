@@ -1,29 +1,19 @@
 import greenfoot.Color;
 import greenfoot.Font;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
-/**
- * Write a description of class IntroWorld here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class IntroWorld extends World {
     private static final int WORLD_WIDTH = 500;
     private static final int WORLD_HEIGHT = 700;
 
-    /**
-     * Constructor for objects of class IntroWorld.
-     */
     public IntroWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
         setBackground("IntroScreen.jpg");
 
         createText("THE PING GAME", (WORLD_WIDTH / 2) - 207, WORLD_HEIGHT / 6, 60);
         createText("Made by: Stan, Josip, Erik", 10, 690, 15);
-        // createText("Press ENTER to start", 130, 350, 20);
         createText("Use left and right < > or A and D keys to move!", 72, 245, 15);
         
         createText("PLAY WITH A FRIEND!", (WORLD_WIDTH / 2) - 80, 475, 15);
