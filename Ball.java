@@ -19,6 +19,7 @@ public class Ball extends Actor {
     private boolean hasBouncedVertically;
     private boolean hasBouncedOffPaddle;
     private int delay;
+    private int roundCounter = 1;
 
     /**
      * Constructs the ball and sets it in motion!
@@ -29,7 +30,8 @@ public class Ball extends Actor {
     }
 
     /**
-     * Creates and sets an image of a black ball to this actor.
+     *
+     * Creates and sets an image of a ball to this actor.
      */
     private void createImage() {
         GreenfootImage ballImage = new GreenfootImage("ball.png");
@@ -50,8 +52,9 @@ public class Ball extends Actor {
             checkBounceOffWalls();
             checkBounceOffCeiling();
 
-
             checkGameOver();
+            checkRestart();
+
         }
     }
 
@@ -70,7 +73,9 @@ public class Ball extends Actor {
      * Returns true if the ball is touching the ceiling.
      */
     private boolean isTouchingCeiling() {
+
         return (getY() <= BALL_SIZE / 2);
+
     }
 
     /**
@@ -114,6 +119,25 @@ public class Ball extends Actor {
         pingWorld.getScoreManager().incrementScore();
     }
 
+    private void incrementP1Score() {
+        PingWorld pingWorld = (PingWorld) this.getWorld();
+        pingWorld.getScoreManager().incrementP1score();
+    }
+
+    private void incrementP2Score() {
+        PingWorld pingWorld = (PingWorld) this.getWorld();
+        pingWorld.getScoreManager().incrementP2score();
+    }
+
+    private void incrementRoundCounter() {
+        roundCounter++;
+    }
+
+    private int getRoundCounter() {
+        return roundCounter;
+    }
+
+
     /**
      * Check to see if the ball should bounce off the ceiling.
      * If touching the ceiling the ball is bouncing off.
@@ -123,14 +147,18 @@ public class Ball extends Actor {
             setHasBouncedVertically(false);
             return;
         }
+
         if (hasBouncedVertically) return;
 
-        revertVertically();
-        SoundManager.playWallHit();
+        if (!(GlobalConfig.getGameMode() == 2)) {
+            revertVertically();
+            SoundManager.playWallHit();
+        }
     }
 
+
     private void checkBounce() {
-        if (!isTouching(Player.class) && !isTouching(SlidingPaddle.class) && !isTouching(Bot.class)) {
+        if (!isTouching(Player.class) && !isTouching(Player1.class) && !isTouching(SlidingPaddle.class) && !isTouching(Bot.class)) {
             setHasBouncedOffPaddle(false);
             return;
         }
@@ -141,7 +169,7 @@ public class Ball extends Actor {
         if (isTouching(SlidingPaddle.class) && !isMovingUpwards()) return;
         if (isTouching(Bot.class) && !isMovingUpwards()) return;
 
-        if (isTouching(Player.class)) incrementPlayerScore();
+        if (isTouching(Player.class) && (GlobalConfig.getGameMode() != 2)) incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -151,23 +179,40 @@ public class Ball extends Actor {
 
     /**
      * Check to see if the ball should be restarted.
-     * If touching the floor the ball is restarted in initial position and speed.
-     * @deprecated Kept for testing
+     * If touching the floor the ball is restarted in initial position and speed
      */
     private void checkRestart() {
-        if (!isTouchingFloor()) return;
+        if (GlobalConfig.getGameMode() != 2) return;
+        if (!isTouchingFloor() && !isTouchingCeiling()) return;
+
+        if (isTouchingFloor()) incrementP2Score();
+        if (isTouchingCeiling()) incrementP1Score();
+
+        incrementRoundCounter();
         init();
-        setLocation(getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+        
+        setLocation(this.getWorld().getWidth() / 2, this.getWorld().getHeight() / 2);
     }
 
     /**
      * Check to see if the ball touched the floor.
      * If touching the floor, the game world is switched to GameOver
      */
-    private void checkGameOver(){
-        if (!isTouchingFloor()) return;
+    private void checkGameOver() {
+        if (!isTouchingFloor() && GlobalConfig.getGameMode() != 2) return;
+
         PingWorld pingWorld = (PingWorld) this.getWorld();
-        Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
+
+        if (GlobalConfig.getGameMode() != 2) {
+            Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
+            return;
+        }
+
+        if (pingWorld.getScoreManager().getP1Score() >= 10) {
+            Greenfoot.setWorld(new GameOver("P1", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+        } else if (pingWorld.getScoreManager().getP2Score() >= 10) {
+            Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+        }
     }
 
     /**
@@ -207,7 +252,11 @@ public class Ball extends Actor {
         hasBouncedHorizontally = false;
         hasBouncedVertically = false;
         hasBouncedOffPaddle = false;
-        setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH) + STARTING_ANGLE_WIDTH / 2);
+
+        if (getRoundCounter() % 2 == 0)
+            setRotation(Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH) + STARTING_ANGLE_WIDTH / 2);
+        else
+            setRotation(180 + Greenfoot.getRandomNumber(STARTING_ANGLE_WIDTH) + STARTING_ANGLE_WIDTH / 2);
     }
 
 }

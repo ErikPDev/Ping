@@ -23,6 +23,15 @@ public class GameOver extends World {
         createText("Press ENTER to start again", (WORLD_WIDTH/2) - 150, WORLD_HEIGHT / 2, 20);
         createText("Game Level:" + gameLevel, (WORLD_WIDTH/2) - 55, WORLD_HEIGHT / 2 + 30, 20);
     }
+    
+    public GameOver(String winner, int P1score, int P2score) {
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(WORLD_WIDTH, WORLD_HEIGHT, 1);
+        setBackground(new GreenfootImage("space.jpg"));
+        createText(winner + " IS \nTHE WINNER!", (WORLD_WIDTH/2) - 150  , (WORLD_HEIGHT / 3), 50);
+        createText("Press ENTER to start again", (WORLD_WIDTH/2) - 150, WORLD_HEIGHT / 2, 20);
+        createText("Final score:" + P1score + " : " + P2score , (WORLD_WIDTH/2) - 100, WORLD_HEIGHT / 2 + 30, 20);
+    }
 
     public void act(){
         if (Greenfoot.isKeyDown("enter"))
