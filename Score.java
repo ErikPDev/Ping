@@ -13,6 +13,6 @@ public class Score extends TextDisplay {
     }
 
     public void updateGameLevel(int level) {
-        this.updateText("Game Level:" + level);
+        this.updateText("Game Level: " + level);
     }
 }

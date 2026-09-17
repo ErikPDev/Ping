@@ -15,7 +15,7 @@ public class SlidingPaddle extends Paddle {
      * Constructs a new paddle with the given dimensions.
      */
     public SlidingPaddle(int width, int height) {
-        super(width, height, new Color(52, 245, 160));
+        super(width, height, "paddle4.png");
     }
 
     /**

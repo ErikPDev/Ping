@@ -35,7 +35,9 @@ public class PingWorld extends World {
         background.setColor(Color.BLACK);
 
         addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-        addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+        if(GlobalConfig.getGameMode() != 2 ) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+        else addObject(new Player(100, 20, "paddle1.png"), 60, WORLD_HEIGHT - 50);
+        
 
         if (GlobalConfig.getGameMode() == 0)
             addObject(new SlidingPaddle(100, 20), botX, botY);
