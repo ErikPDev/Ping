@@ -20,8 +20,18 @@ public class Bot extends Paddle {
     public void act() {
         // Find the ball in the game
         Ball ball = this.getWorld().getObjects(Ball.class).getFirst();
-        if (!ball.isMovingUpwards()) return;
+        if (ball.isMovingUpwards()){
         if (ball.getX() > this.getX()) move(PADDLE_SPEED);
         if (ball.getX() < this.getX()) move(-PADDLE_SPEED);
+        }else{if (!ball.isMovingUpwards()){
+                if (this.getX() <250){
+                  move(PADDLE_SPEED);
+                 }
+                if (this.getX() > 250){
+                  move(-PADDLE_SPEED);
+                 }
+                }
+        }
+        
     }
 }
