@@ -40,12 +40,5 @@ public class IntroWorld extends World {
         background.setColor(Color.GREEN);
         background.drawString(text, x, y);
     }
-
-    public void act() {
-        String key = Greenfoot.getKey();
-        if (key != null && key.equals("enter")) {
-            Greenfoot.setWorld(new PingWorld());
-        }
-    }
-
+    
 }
