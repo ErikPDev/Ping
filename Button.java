@@ -75,7 +75,7 @@ public abstract class Button extends Actor {
     private void checkHover() {
         if (Greenfoot.mouseMoved(this) && !isHovered) {
             setHoverButton(true);
-            SoundManager.playButtonOver();
+            SoundManager.playButtonHover();
         }
 
         if (Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this) && isHovered) {

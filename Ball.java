@@ -150,7 +150,7 @@ public class Ball extends Actor {
 
         if (hasBouncedVertically) return;
 
-        if (!(GlobalConfig.getGameMode() == 2)) {
+        if (GlobalConfig.getGameMode() == 0) {
             revertVertically();
             SoundManager.playWallHit();
         }
@@ -169,7 +169,7 @@ public class Ball extends Actor {
         if (isTouching(SlidingPaddle.class) && !isMovingUpwards()) return;
         if (isTouching(Bot.class) && !isMovingUpwards()) return;
 
-        if (isTouching(Player.class) && (GlobalConfig.getGameMode() != 2)) incrementPlayerScore();
+        if (isTouching(Player.class) && (GlobalConfig.getGameMode() == 0)) incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -182,7 +182,7 @@ public class Ball extends Actor {
      * If touching the floor the ball is restarted in initial position and speed
      */
     private void checkRestart() {
-        if (GlobalConfig.getGameMode() != 2) return;
+        if (GlobalConfig.getGameMode() == 0) return;
         if (!isTouchingFloor() && !isTouchingCeiling()) return;
 
         if (isTouchingFloor()) incrementP2Score();
@@ -199,11 +199,11 @@ public class Ball extends Actor {
      * If touching the floor, the game world is switched to GameOver
      */
     private void checkGameOver() {
-        if (!isTouchingFloor() && GlobalConfig.getGameMode() != 2) return;
+        if (!isTouchingFloor() && GlobalConfig.getGameMode() == 0) return;
 
         PingWorld pingWorld = (PingWorld) this.getWorld();
 
-        if (GlobalConfig.getGameMode() != 2) {
+        if (GlobalConfig.getGameMode()  == 0) {
             Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
             return;
         }
@@ -211,7 +211,9 @@ public class Ball extends Actor {
         if (pingWorld.getScoreManager().getP1Score() >= 10) {
             Greenfoot.setWorld(new GameOver("P1", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
         } else if (pingWorld.getScoreManager().getP2Score() >= 10) {
-            Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+            if(GlobalConfig.getGameMode() == 1) Greenfoot.setWorld(new GameOver("BOT", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+            if(GlobalConfig.getGameMode() == 2) Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+            
         }
     }
 

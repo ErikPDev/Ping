@@ -6,7 +6,7 @@ public class SoundManager {
     private static final String SCORE_POINT_AUDIO = "point-scored.wav";
     private static final String PADDLE_HIT_AUDIO = "paddle-hit.wav";
     private static final String MENU_HOVER_AUDIO = "gamemode-hover.mp3";
-    private static final String MENU_CLICK_AUDIO = "wall-hit.wav";
+    private static final String MENU_CLICK_AUDIO = "button-click.wav";
 
 
     static void playWallHit() {
@@ -25,7 +25,7 @@ public class SoundManager {
         Greenfoot.playSound(PADDLE_HIT_AUDIO);
     }
 
-    static void playButtonOver() {
+    static void playButtonHover() {
         Greenfoot.playSound(MENU_HOVER_AUDIO);
     }
 

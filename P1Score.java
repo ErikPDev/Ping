@@ -13,6 +13,6 @@ public class P1Score extends TextDisplay {
     }
 
     public void updateP1score(int P1score) {
-        this.updateText("P1:" + P1score);
+        this.updateText("P1: " + P1score);
     }
 }
