@@ -1,14 +1,14 @@
 import events.ScoreEvent;
 import greenfoot.Color;
 
-public class P1score extends TextDisplay {
-    public P1score() {
+public class P1Score extends TextDisplay {
+    public P1Score() {
         super("P1: 0", 24, Color.WHITE);
         
-        // Add P1score Event Listener
+        // Add P1Score Event Listener
         ScoreEvent.subscribeTo(() -> {
             PingWorld pingWorld = (PingWorld) this.getWorld();
-            this.updateP1score(pingWorld.getScoreManager().getP1score());
+            this.updateP1score(pingWorld.getScoreManager().getP1Score());
         });
     }
 

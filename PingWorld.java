@@ -46,8 +46,8 @@ public class PingWorld extends World {
 
         if (!(GlobalConfig.getGameMode() == 2)) addObject(new Score(), WORLD_WIDTH - 100, 20);
         else{
-            addObject(new P1score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) + 20);
-            addObject(new P2score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) - 20);
+            addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) + 20);
+            addObject(new P2Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) - 20);
         }
     }
 

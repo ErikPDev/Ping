@@ -1,14 +1,14 @@
 import events.ScoreEvent;
 import greenfoot.Color;
 
-public class P2score extends TextDisplay {
-    public P2score() {
+public class P2Score extends TextDisplay {
+    public P2Score() {
         super("P2: 0", 24, Color.WHITE);
         
-        // Add P2score Event Listener
+        // Add P2Score Event Listener
         ScoreEvent.subscribeTo(() -> {
             PingWorld pingWorld = (PingWorld) this.getWorld();
-            this.updateP2score(pingWorld.getScoreManager().getP2score());
+            this.updateP2score(pingWorld.getScoreManager().getP2Score());
         });
     }
 

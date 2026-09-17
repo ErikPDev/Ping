@@ -9,11 +9,11 @@ public class ScoreManager {
         return this.score;
     }
     
-    public int getP1score() {
+    public int getP1Score() {
         return this.P1score;
     }
     
-    public int getP2score() {
+    public int getP2Score() {
         return this.P2score;
     }
 
