@@ -188,8 +188,9 @@ public class Ball extends Actor {
         if (isTouchingFloor()) incrementP2Score();
         if (isTouchingCeiling()) incrementP1Score();
 
-        init();
         incrementRoundCounter();
+        init();
+        
         setLocation(this.getWorld().getWidth() / 2, this.getWorld().getHeight() / 2);
     }
 
