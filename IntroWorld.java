@@ -15,12 +15,12 @@ public class IntroWorld extends World {
         createText("THE PING GAME", (WORLD_WIDTH / 2) - 207, WORLD_HEIGHT / 6, 60);
         createText("Made by: Stan, Josip, Erik", 10, 690, 15);
         createText("Use left and right < > or A and D keys to move!", 72, 245, 15);
-        
+
         createText("PLAY WITH A FRIEND!", (WORLD_WIDTH / 2) - 80, 475, 15);
 
         addObject(new SlidingPaddleButton(), WORLD_WIDTH / 2, 295);
         addObject(new BotPaddleButton(), WORLD_WIDTH / 2, 375);
-        addObject(new MultiplayerButton(), WORLD_WIDTH /2, 515);
+        addObject(new MultiplayerButton(), WORLD_WIDTH / 2, 515);
     }
 
     private void createText(String text, int x, int y, int fontSize) {
@@ -30,5 +30,5 @@ public class IntroWorld extends World {
         background.setColor(new Color(0, 255, 255));
         background.drawString(text, x, y);
     }
-    
+
 }

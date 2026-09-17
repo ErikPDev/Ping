@@ -1,9 +1,3 @@
-import greenfoot.Actor;
-import greenfoot.Color;
-import greenfoot.Greenfoot;
-import greenfoot.GreenfootImage;
-
-
 /**
  * A paddle is an object that goes back and forth. Though it would be nice if balls would bounce of it.
  *

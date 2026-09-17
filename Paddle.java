@@ -10,8 +10,8 @@ import greenfoot.GreenfootImage;
  * @version 1
  */
 public class Paddle extends Actor {
-    private final int COLOR_RADIUS = 30;
     public static final int PADDLE_SPEED = 3;
+    private final int COLOR_RADIUS = 30;
     private final int width;
     private final int height;
 
@@ -30,7 +30,7 @@ public class Paddle extends Actor {
         createImage(imagePath);
     }
 
-    private void createImage(String imagePath){
+    private void createImage(String imagePath) {
         GreenfootImage image = new GreenfootImage(imagePath);
         setImage(image);
     }

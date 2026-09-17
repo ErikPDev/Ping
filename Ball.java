@@ -190,7 +190,7 @@ public class Ball extends Actor {
 
         incrementRoundCounter();
         init();
-        
+
         setLocation(this.getWorld().getWidth() / 2, this.getWorld().getHeight() / 2);
     }
 

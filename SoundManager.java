@@ -1,4 +1,4 @@
-import greenfoot.*;
+import greenfoot.Greenfoot;
 
 public class SoundManager {
     private static final String WALL_HIT_AUDIO = "wall-hit.wav";
@@ -9,27 +9,27 @@ public class SoundManager {
     private static final String MENU_CLICK_AUDIO = "wall-hit.wav";
 
 
-    static void playWallHit(){
+    static void playWallHit() {
         Greenfoot.playSound(WALL_HIT_AUDIO);
     }
 
-    static void playGameWin(){
+    static void playGameWin() {
         Greenfoot.playSound(GAME_WIN_AUDIO);
     }
 
-    static void playScorePoint(){
+    static void playScorePoint() {
         Greenfoot.playSound(SCORE_POINT_AUDIO);
     }
 
-    static void playPaddleHit(){
+    static void playPaddleHit() {
         Greenfoot.playSound(PADDLE_HIT_AUDIO);
     }
-    
-    static void playButtonOver(){
+
+    static void playButtonOver() {
         Greenfoot.playSound(MENU_HOVER_AUDIO);
     }
 
-    static void playButtonClick(){
+    static void playButtonClick() {
         Greenfoot.playSound(MENU_CLICK_AUDIO);
     }
 

@@ -4,7 +4,7 @@ import greenfoot.Color;
 public class P2Score extends TextDisplay {
     public P2Score() {
         super("P2: 0", 24, Color.WHITE);
-        
+
         // Add P2Score Event Listener
         ScoreEvent.subscribeTo(() -> {
             PingWorld pingWorld = (PingWorld) this.getWorld();

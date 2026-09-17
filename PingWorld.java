@@ -23,33 +23,39 @@ public class PingWorld extends World {
     public PingWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
 
-        setPaintOrder(Ball.class, Paddle.class,TextDisplay.class);
-        
+        setPaintOrder(Ball.class, Paddle.class, TextDisplay.class);
+
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
-        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
-        
-        if(GlobalConfig.getGameMode()== 2) setBackground(new GreenfootImage("field-multiplayer.png"));
+        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT / 2);
+
+        if (GlobalConfig.getGameMode() == 2) setBackground(new GreenfootImage("field-multiplayer.png"));
         else setBackground(new GreenfootImage("field.png"));
 
         GreenfootImage background = getBackground();
         background.setColor(Color.BLACK);
 
         addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
-        if(GlobalConfig.getGameMode() != 2 ) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+
+        /*
+         * TODO: Refactor everything below - Erik
+         * Split it into different functions and logics
+         */
+        if (GlobalConfig.getGameMode() != 2) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
         else addObject(new Player(100, 20, "paddle1.png"), 60, WORLD_HEIGHT - 50);
-        
+
 
         if (GlobalConfig.getGameMode() == 0)
             addObject(new SlidingPaddle(100, 20), botX, botY);
+
         else if (GlobalConfig.getGameMode() == 1)
             addObject(new Bot(100, 20), botX, 50);
-        else 
+        else
             addObject(new Player1(100, 20), 60, 50);
 
         if (!(GlobalConfig.getGameMode() == 2)) addObject(new Score(), WORLD_WIDTH - 100, 20);
-        else{
-            addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) + 20);
-            addObject(new P2Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT/2) - 20);
+        else {
+            addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
+            addObject(new P2Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) - 20);
         }
     }
 

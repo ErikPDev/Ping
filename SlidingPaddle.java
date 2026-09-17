@@ -1,4 +1,3 @@
-import greenfoot.Color;
 import greenfoot.Greenfoot;
 
 /**
@@ -11,32 +10,25 @@ public class SlidingPaddle extends Paddle {
 
     private int dx = 1;
 
-    /**
-     * Constructs a new paddle with the given dimensions.
-     */
     public SlidingPaddle(int width, int height) {
         super(width, height, "paddle4.png");
     }
 
-    /**
-     * Act - do whatever the Bot wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void act() {
         setLocation(getX() + dx, getY());
-        createNewBot();    
+        checkCreateNewBot();
     }
 
-    private void createNewBot(){
+    private void checkCreateNewBot() {
         if (!isAtEdge()) return;
-        
+
         int WORLD_HEIGHT = this.getWorld().getHeight();
-        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT/2);
-        
+        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT / 2);
+
         SlidingPaddle bot = new SlidingPaddle(100, 20);
-        
-        getWorld().addObject(bot, 0, botY);      
-        getWorld().removeObject(this);       
+
+        getWorld().addObject(bot, 0, botY);
+        getWorld().removeObject(this);
     }
 
 }
