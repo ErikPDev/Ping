@@ -58,7 +58,8 @@ public class PingWorld extends World {
             addObject(new Score("Game Level", Score.ScoreType.GAME_LEVEL), WORLD_WIDTH - 100, 20);
         else {
             addObject(new Score("P1", Score.ScoreType.P1SCORE), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
-            addObject(new Score("Bot", Score.ScoreType.P2SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
+            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER) addObject(new Score("P2", Score.ScoreType.P2SCORE), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) - 20);
+            else addObject(new Score("Bot", Score.ScoreType.P2SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
         }
     }
 
