@@ -22,8 +22,8 @@ public class SlidingPaddle extends Paddle {
     private void checkCreateNewBot() {
         if (!isAtEdge()) return;
 
-        int WORLD_HEIGHT = this.getWorld().getHeight();
-        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT / 2);
+        int worldHeight = this.getWorld().getHeight();
+        int botY = Greenfoot.getRandomNumber(worldHeight / 2);
 
         SlidingPaddle bot = new SlidingPaddle(100, 20);
 
