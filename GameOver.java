@@ -29,7 +29,7 @@ public class GameOver extends World {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
         setBackground(new GreenfootImage("GameOverScreenMultiplayer.jpg"));
-        createText(winner + " IS THE", -5, 95, 110);
+        createText(winner + " IS THE", 35, 95, 110);
         createText("WINNER!", 43, 200, 110);
 
         createText("Final score:  " + P1score + " - " + P2score, (WORLD_WIDTH / 2) - 233, WORLD_HEIGHT / 2, 50);
