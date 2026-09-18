@@ -52,10 +52,10 @@ public class PingWorld extends World {
         else
             addObject(new Player(100, 20, "a", "d"), 60, 50);
 
-        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) addObject(new Score(), WORLD_WIDTH - 100, 20);
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) addObject(new Score("Game Level", Score.ScoreType.GAME_LEVEL), WORLD_WIDTH - 100, 20);
         else {
-            addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
-            addObject(new P2Score("BOT"), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
+            addObject(new Score("P1", Score.ScoreType.P1SCORE), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
+            addObject(new Score("Bot", Score.ScoreType.P2SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
         }
     }
 
