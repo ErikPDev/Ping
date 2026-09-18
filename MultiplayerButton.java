@@ -6,7 +6,7 @@ public class MultiplayerButton extends Button {
     }
 
     public void executeAction() {
-        GlobalConfig.setGameMode(2);
+        GlobalConfig.setGameMode(GlobalConfig.GameMode.TWO_PLAYER);
         Greenfoot.setWorld(new PingWorld());
     }
 }

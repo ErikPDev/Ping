@@ -150,7 +150,7 @@ public class Ball extends Actor {
 
         if (hasBouncedVertically) return;
 
-        if (GlobalConfig.getGameMode() == 0) {
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) {
             revertVertically();
             SoundManager.playWallHit();
         }
@@ -169,7 +169,7 @@ public class Ball extends Actor {
         if (isTouching(SlidingPaddle.class) && !isMovingUpwards()) return;
         if (isTouching(Bot.class) && !isMovingUpwards()) return;
 
-        if (isTouching(Player.class) && (GlobalConfig.getGameMode() == 0)) incrementPlayerScore();
+        if (isTouching(Player.class) && (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)) incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -182,12 +182,12 @@ public class Ball extends Actor {
      * If touching the floor the ball is restarted in initial position and speed
      */
     private void checkRestart() {
-        if (GlobalConfig.getGameMode() == 0) return;
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) return;
         if (!isTouchingFloor() && !isTouchingCeiling()) return;
 
         if (isTouchingFloor())
         {
-            if(GlobalConfig.getGameMode() == 1 ) SoundManager.playBotScore();
+            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT ) SoundManager.playBotScore();
             else SoundManager.playScorePoint();
             
             incrementP2Score();
@@ -208,31 +208,32 @@ public class Ball extends Actor {
     /**
      * Check to see if the ball touched the floor.
      * If touching the floor, the game world is switched to GameOver
+     * Todo: Refactor this
      */
     private void checkGameOver() {
-        if (!isTouchingFloor() && GlobalConfig.getGameMode() == 0) return;
+        if (!isTouchingFloor() && GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) return;
 
         PingWorld pingWorld = (PingWorld) this.getWorld();
 
-        if (GlobalConfig.getGameMode()  == 0) {
+        if (GlobalConfig.getGameMode()  == GlobalConfig.GameMode.SLIDING_AI) {
             SoundManager.playGameOver();
             Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
             return;
         }
 
         if (pingWorld.getScoreManager().getP1Score() >= 10) {
-            if( GlobalConfig.getGameMode() == 1) Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 1));
+            if( GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT) Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 1));
             else Greenfoot.setWorld(new GameOver("P1", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
         } 
         else if (pingWorld.getScoreManager().getP2Score() >= 10) {
-            if(GlobalConfig.getGameMode() == 1) 
+            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
             {
                 SoundManager.playGameOver();
                 Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 0));
             } 
             
             
-            if(GlobalConfig.getGameMode() == 2) Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER) Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
             
         }
     }

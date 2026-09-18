@@ -28,7 +28,7 @@ public class PingWorld extends World {
         int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
         int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT / 2);
 
-        if (GlobalConfig.getGameMode() == 2) setBackground(new GreenfootImage("field-multiplayer.png"));
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER) setBackground(new GreenfootImage("field-multiplayer.png"));
         else setBackground(new GreenfootImage("field.png"));
 
         GreenfootImage background = getBackground();
@@ -40,19 +40,19 @@ public class PingWorld extends World {
          * TODO: Refactor everything below - Erik
          * Split it into different functions and logics
          */
-        if (GlobalConfig.getGameMode() != 2) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
+        if (GlobalConfig.getGameMode() != GlobalConfig.GameMode.TWO_PLAYER) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
         else addObject(new Player(100, 20, "paddle1.png"), 60, WORLD_HEIGHT - 50);
 
 
-        if (GlobalConfig.getGameMode() == 0)
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)
             addObject(new SlidingPaddle(100, 20), botX, botY);
 
-        else if (GlobalConfig.getGameMode() == 1)
+        else if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
             addObject(new Bot(100, 20), botX, 50);
         else
             addObject(new Player1(100, 20), 60, 50);
 
-        if (GlobalConfig.getGameMode() == 0) addObject(new Score(), WORLD_WIDTH - 100, 20);
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) addObject(new Score(), WORLD_WIDTH - 100, 20);
         else {
             addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
             addObject(new P2Score("BOT"), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);

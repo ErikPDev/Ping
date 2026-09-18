@@ -6,7 +6,7 @@ public class SlidingPaddleButton extends Button {
     }
 
     public void executeAction() {
-        GlobalConfig.setGameMode(0);
+        GlobalConfig.setGameMode(GlobalConfig.GameMode.SLIDING_AI);
         Greenfoot.setWorld(new PingWorld());
     }
 }

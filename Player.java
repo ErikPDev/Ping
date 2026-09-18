@@ -17,7 +17,7 @@ public class Player extends Paddle {
      * TODO: Refactor this
      */
     public void act() {
-        if (!(GlobalConfig.getGameMode() == 2)) {
+        if (!(GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER)) {
             if (Greenfoot.isKeyDown("right") || Greenfoot.isKeyDown("D")) this.move(PADDLE_SPEED);
             else if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("A")) this.move(-PADDLE_SPEED);
         } else {

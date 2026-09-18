@@ -6,7 +6,7 @@ public class BotPaddleButton extends Button {
     }
 
     public void executeAction() {
-        GlobalConfig.setGameMode(1);
+        GlobalConfig.setGameMode(GlobalConfig.GameMode.BOT);
         Greenfoot.setWorld(new PingWorld());
     }
 }
