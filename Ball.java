@@ -158,7 +158,7 @@ public class Ball extends Actor {
 
 
     private void checkBounce() {
-        if (!isTouching(Player.class) && !isTouching(Player1.class) && !isTouching(SlidingPaddle.class) && !isTouching(Bot.class)) {
+        if (!isTouching(Player.class) && !isTouching(SlidingPaddle.class) && !isTouching(Bot.class)) {
             setHasBouncedOffPaddle(false);
             return;
         }

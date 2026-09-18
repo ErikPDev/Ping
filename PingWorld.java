@@ -40,8 +40,8 @@ public class PingWorld extends World {
          * TODO: Refactor everything below - Erik
          * Split it into different functions and logics
          */
-        if (GlobalConfig.getGameMode() != GlobalConfig.GameMode.TWO_PLAYER) addObject(new Player(100, 20), 60, WORLD_HEIGHT - 50);
-        else addObject(new Player(100, 20, "paddle1.png"), 60, WORLD_HEIGHT - 50);
+        if (GlobalConfig.getGameMode() != GlobalConfig.GameMode.TWO_PLAYER) addObject(new Player(100, 20, "left", "right"), 60, WORLD_HEIGHT - 50);
+        else addObject(new Player(100, 20, "paddle1.png", "left", "right"), 60, WORLD_HEIGHT - 50);
 
 
         if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)
@@ -50,7 +50,7 @@ public class PingWorld extends World {
         else if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
             addObject(new Bot(100, 20), botX, 50);
         else
-            addObject(new Player1(100, 20), 60, 50);
+            addObject(new Player(100, 20, "a", "d"), 60, 50);
 
         if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) addObject(new Score(), WORLD_WIDTH - 100, 20);
         else {
