@@ -9,16 +9,15 @@ public class Bot extends Paddle {
 
 
     private void moveTowardsBall(Ball ball) {
-        if(ball.getY() < (getWorld().getHeight()/2)){
-            if(ball.getX() > this.getX()) move(PADDLE_SPEED);
+        if (ball.getY() < (getWorld().getHeight() / 2)) {
+            if (ball.getX() > this.getX()) move(PADDLE_SPEED);
             if (ball.getX() < this.getX()) move(-PADDLE_SPEED);
         }
-        
+
     }
 
-  
 
-    private void moveTowardsCenter(){
+    private void moveTowardsCenter() {
         if (this.getX() < 250) move(PADDLE_SPEED);
         if (this.getX() > 250) move(-PADDLE_SPEED);
     }

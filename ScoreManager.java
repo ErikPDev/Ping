@@ -1,18 +1,18 @@
 import events.ScoreEvent;
 
 public class ScoreManager {
-    private int score, P1score, P2score = 0;
+    private int score, P1Score, P2Score = 0;
 
     public int getScore() {
         return this.score;
     }
 
     public int getP1Score() {
-        return this.P1score;
+        return this.P1Score;
     }
 
     public int getP2Score() {
-        return this.P2score;
+        return this.P2Score;
     }
 
     public void incrementScore() {
@@ -20,13 +20,13 @@ public class ScoreManager {
         ScoreEvent.fireEvent();
     }
 
-    public void incrementP1score() {
-        this.P1score++;
+    public void incrementP1Score() {
+        this.P1Score++;
         ScoreEvent.fireEvent();
     }
 
-    public void incrementP2score() {
-        this.P2score++;
+    public void incrementP2Score() {
+        this.P2Score++;
         ScoreEvent.fireEvent();
     }
 

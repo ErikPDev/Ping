@@ -126,7 +126,7 @@ public class Ball extends Actor {
 
     private void incrementP2Score() {
         PingWorld pingWorld = (PingWorld) this.getWorld();
-        pingWorld.getScoreManager().incrementP2score();
+        pingWorld.getScoreManager().incrementP2Score();
     }
 
     private void incrementRoundCounter() {
@@ -169,7 +169,8 @@ public class Ball extends Actor {
         if (isTouching(SlidingPaddle.class) && !isMovingUpwards()) return;
         if (isTouching(Bot.class) && !isMovingUpwards()) return;
 
-        if (isTouching(Player.class) && (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)) incrementPlayerScore();
+        if (isTouching(Player.class) && (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI))
+            incrementPlayerScore();
 
         this.revertVertically();
         SoundManager.playPaddleHit();
@@ -185,16 +186,14 @@ public class Ball extends Actor {
         if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) return;
         if (!isTouchingFloor() && !isTouchingCeiling()) return;
 
-        if (isTouchingFloor())
-        {
-            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT ) SoundManager.playBotScore();
+        if (isTouchingFloor()) {
+            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT) SoundManager.playBotScore();
             else SoundManager.playScorePoint();
-            
+
             incrementP2Score();
-            
         }
-        if (isTouchingCeiling()) 
-        {
+
+        if (isTouchingCeiling()) {
             SoundManager.playScorePoint();
             incrementP1Score();
         }
@@ -215,26 +214,27 @@ public class Ball extends Actor {
 
         PingWorld pingWorld = (PingWorld) this.getWorld();
 
-        if (GlobalConfig.getGameMode()  == GlobalConfig.GameMode.SLIDING_AI) {
+        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI) {
             SoundManager.playGameOver();
             Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getGameLevel()));
             return;
         }
 
         if (pingWorld.getScoreManager().getP1Score() >= 10) {
-            if( GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT) Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 1));
-            else Greenfoot.setWorld(new GameOver("P1", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
-        } 
-        else if (pingWorld.getScoreManager().getP2Score() >= 10) {
-            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
-            {
+            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
+                Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 1));
+            else
+                Greenfoot.setWorld(new GameOver("P1", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+        } else if (pingWorld.getScoreManager().getP2Score() >= 10) {
+            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT) {
                 SoundManager.playGameOver();
                 Greenfoot.setWorld(new GameOver(pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score(), 0));
-            } 
-            
-            
-            if(GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER) Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
-            
+            }
+
+
+            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER)
+                Greenfoot.setWorld(new GameOver("P2", pingWorld.getScoreManager().getP1Score(), pingWorld.getScoreManager().getP2Score()));
+
         }
     }
 

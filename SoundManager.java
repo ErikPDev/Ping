@@ -9,6 +9,7 @@ public class SoundManager {
     private static final String MENU_CLICK_AUDIO = "button-click.wav";
     private static final String GAME_OVER_AUDIO = "game-over.wav";
     private static final String BOT_SCORE_AUDIO = "bot-score.wav";
+
     static void playWallHit() {
         Greenfoot.playSound(WALL_HIT_AUDIO);
     }
@@ -32,11 +33,11 @@ public class SoundManager {
     static void playButtonClick() {
         Greenfoot.playSound(MENU_CLICK_AUDIO);
     }
-    
+
     static void playGameOver() {
         Greenfoot.playSound(GAME_OVER_AUDIO);
     }
-    
+
     static void playBotScore() {
         Greenfoot.playSound(BOT_SCORE_AUDIO);
     }

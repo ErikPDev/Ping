@@ -4,6 +4,7 @@ public class Player extends Paddle {
 
     private String leftKey;
     private String rightKey;
+
     /**
      * Constructs a new paddle with the given dimensions.
      */
@@ -13,7 +14,7 @@ public class Player extends Paddle {
         this.rightKey = rightKey;
     }
 
-    public Player(int width, int height, String image,  String leftKey, String rightKey) {
+    public Player(int width, int height, String image, String leftKey, String rightKey) {
         super(width, height, image);
         this.leftKey = leftKey;
         this.rightKey = rightKey;

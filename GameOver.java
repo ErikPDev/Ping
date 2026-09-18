@@ -35,14 +35,14 @@ public class GameOver extends World {
         createText("Final score:  " + P1score + " - " + P2score, (WORLD_WIDTH / 2) - 233, WORLD_HEIGHT / 2, 50);
         createText("Press ENTER to start again", (WORLD_WIDTH / 2) - 175, WORLD_HEIGHT / 2 + 105, 27);
     }
-    
-    public GameOver(int P1score, int BotScore, int option){
+
+    public GameOver(int P1score, int BotScore, int option) {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
-        
-        if(option == 0) setBackground(new GreenfootImage("GameOverScreenBot.jpg"));        
+
+        if (option == 0) setBackground(new GreenfootImage("GameOverScreenBot.jpg"));
         else setBackground(new GreenfootImage("GameOverScreenBot2.jpg"));
-        
-        createText("Final score:  " + P1score + " - " + BotScore, (WORLD_WIDTH / 2) - 233, WORLD_HEIGHT /2 + 205, 50);
+
+        createText("Final score:  " + P1score + " - " + BotScore, (WORLD_WIDTH / 2) - 233, WORLD_HEIGHT / 2 + 205, 50);
         createText("Press ENTER to start again", (WORLD_WIDTH / 2) - 175, WORLD_HEIGHT / 2 + 235, 27);
     }
 
