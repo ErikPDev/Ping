@@ -121,7 +121,7 @@ public class Ball extends Actor {
 
     private void incrementP1Score() {
         PingWorld pingWorld = (PingWorld) this.getWorld();
-        pingWorld.getScoreManager().incrementP1score();
+        pingWorld.getScoreManager().incrementP1Score();
     }
 
     private void incrementP2Score() {

@@ -16,7 +16,6 @@ public class Bot extends Paddle {
 
     }
 
-
     private void moveTowardsCenter() {
         if (this.getX() < 250) move(PADDLE_SPEED);
         if (this.getX() > 250) move(-PADDLE_SPEED);
