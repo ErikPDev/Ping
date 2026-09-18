@@ -44,15 +44,19 @@ public class PingWorld extends World {
         else addObject(new Player(100, 20, "paddle1.png"), 60, WORLD_HEIGHT - 50);
 
 
-        if (GlobalConfig.getGameMode() == 0)
-            addObject(new SlidingPaddle(100, 20), botX, botY);
+        switch (GlobalConfig.getGameMode()) {
+            case 0:
+                addObject(new SlidingPaddle(100, 20), botX, botY);
+                break;
+            case 1:
+                addObject(new Bot(100, 20), botX, 50);
+                break;
+            case 2:
+                addObject(new Player1(100, 20), botX, botY);
+                break;
+        }
 
-        else if (GlobalConfig.getGameMode() == 1)
-            addObject(new Bot(100, 20), botX, 50);
-        else
-            addObject(new Player1(100, 20), 60, 50);
-
-        if (!(GlobalConfig.getGameMode() == 2)) addObject(new Score(), WORLD_WIDTH - 100, 20);
+        if ((GlobalConfig.getGameMode() != 2)) addObject(new Score(), WORLD_WIDTH - 100, 20);
         else {
             addObject(new P1Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
             addObject(new P2Score(), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) - 20);
