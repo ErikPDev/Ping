@@ -1,5 +1,4 @@
 import greenfoot.Color;
-import greenfoot.Greenfoot;
 import greenfoot.GreenfootImage;
 import greenfoot.World;
 
@@ -16,51 +15,64 @@ public class PingWorld extends World {
 
     private ScoreManager scoreManager;
 
-    /**
-     * Constructor for objects of class PingWorld.
-     * TODO: refactor this class
-     */
     public PingWorld() {
         super(WORLD_WIDTH, WORLD_HEIGHT, 1);
 
         setPaintOrder(Ball.class, Paddle.class, TextDisplay.class);
 
-        int botX = Greenfoot.getRandomNumber(WORLD_WIDTH);
-        int botY = Greenfoot.getRandomNumber(WORLD_HEIGHT / 2);
-
+        String backgroundImage = "field.png";
         if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER)
-            setBackground(new GreenfootImage("field-multiplayer.png"));
-        else setBackground(new GreenfootImage("field.png"));
+            backgroundImage = "field-multiplayer.png";
 
-        GreenfootImage background = getBackground();
-        background.setColor(Color.BLACK);
+        setBackground(new GreenfootImage(backgroundImage));
 
         addObject(new Ball(), WORLD_WIDTH / 2, WORLD_HEIGHT / 2);
 
-        /*
-         * TODO: Refactor everything below - Erik
-         * Split it into different functions and logics
-         */
-        if (GlobalConfig.getGameMode() != GlobalConfig.GameMode.TWO_PLAYER)
-            addObject(new Player(100, 20, "left", "right"), 60, WORLD_HEIGHT - 50);
-        else addObject(new Player(100, 20, "paddle1.png", "left", "right"), 60, WORLD_HEIGHT - 50);
+        // Two Player Mode, Sliding AI, and BOT
+        // Multiplayer & Bot both have P1 and P2
+        GlobalConfig.GameMode gameMode = GlobalConfig.getGameMode();
 
+        switch(gameMode) {
+            case TWO_PLAYER:
+                this.twoPlayerMode();
+                addPlayerScores("P2");
+                break;
 
-        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)
-            addObject(new SlidingPaddle(100, 20), botX, botY);
+            case SLIDING_AI:
+                this.slidingAIMode();
+                addGameLevel();
+                break;
 
-        else if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.BOT)
-            addObject(new Bot(100, 20), botX, 50);
-        else
-            addObject(new Player(100, 20, "a", "d"), 60, 50);
-
-        if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.SLIDING_AI)
-            addObject(new Score("Game Level", Score.ScoreType.GAME_LEVEL), WORLD_WIDTH - 100, 20);
-        else {
-            addObject(new Score("P1", Score.ScoreType.P1SCORE), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) + 20);
-            if (GlobalConfig.getGameMode() == GlobalConfig.GameMode.TWO_PLAYER) addObject(new Score("P2", Score.ScoreType.P2SCORE), WORLD_WIDTH - 47, (WORLD_HEIGHT / 2) - 20);
-            else addObject(new Score("Bot", Score.ScoreType.P2SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
+            case BOT:
+                this.botMode();
+                addPlayerScores("BOT");
+                break;
         }
+
+    }
+
+    private void addPlayerScores(String label2){
+        addObject(new Score("P1", Score.ScoreType.P1SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) + 20);
+        addObject(new Score(label2, Score.ScoreType.P2SCORE), WORLD_WIDTH - 57, (WORLD_HEIGHT / 2) - 20);
+    }
+
+    private void addGameLevel(){
+        this.addObject(new Score("Game Level", Score.ScoreType.GAME_LEVEL), WORLD_WIDTH - 100, 20);
+    }
+
+    private void botMode(){
+        this.addObject(new Player(100, 20, "left", "right"), 60, WORLD_HEIGHT - 50);
+        this.addObject(new Bot(100, 20), (WORLD_WIDTH/2) - 50, 50);
+    }
+
+    private void slidingAIMode(){
+        this.addObject(new Player(100, 20, "left", "right"), 60, WORLD_HEIGHT - 50);
+        this.addObject(new SlidingPaddle(100, 20), WORLD_WIDTH - 100, 20);
+    }
+
+    private void twoPlayerMode(){
+        this.addObject(new Player(100, 20, "paddle1.png", "left", "right"), 60, WORLD_HEIGHT - 50);
+        this.addObject(new Player(100, 20, "a", "d"), 60, 50);
     }
 
     public ScoreManager getScoreManager() {
